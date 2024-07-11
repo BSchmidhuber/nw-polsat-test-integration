@@ -1,3 +1,5 @@
+"use client"
+
 import { ExperienceBaseStandalone } from '@nativewaves/exp-default';
 import { Env, PlaybackContainer, ThemeProvider } from '@nativewaves/exp-core';
 
