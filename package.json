@@ -9,14 +9,13 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@nativewaves/exp-core": "4.10.2-polsat-player-injection.10",
-    "@nativewaves/exp-default": "4.10.2-polsat-player-injection.10",
+    "@nativewaves/exp-core": "4.10.2-polsat-player-injection.11",
+    "@nativewaves/exp-default": "4.10.2-polsat-player-injection.11",
     "next": "10.0.7",
     "next-transpile-modules": "7.3.0",
     "react": "^18",
     "react-dom": "^18",
     "react-query": "3.9.8",
-    "@tanstack/react-query":"^4.0.5",
     "react-router-dom": "5.2.0",
     "styled-components": "5.2.1"
   },

@@ -13,7 +13,7 @@ const Experience: React.FC<ExperienceProps> = ({ manifestId, envType }) => {
   const [hasWindow, setHasWindow] = useState(false)
 
 if (typeof window === 'undefined') {
-  return <span>no window</span>
+  return <span>window</span>
 }
 
 console.log('window', window)
@@ -24,10 +24,11 @@ return (
         manifestId={manifestId}
         envType={envType}
       >
-        <span>window</span>
+      <>
         <span>{manifestId}, {envType}</span>
-        <ExperienceBaseStandalone routePath={'/'} /> 
-      </PlaybackContainer>
+         <ExperienceBaseStandalone routePath={'/'} /> 
+         </>
+    </PlaybackContainer>
    
     
   );
