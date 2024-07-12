@@ -6,10 +6,12 @@ import Experience from '../components/Experience';
 
 
 const App = () => {
-
+if(typeof window === 'undefined') {
+  return <span>window</span>
+}
   return (
       <Experience
-        manifestId='j7r31vhy8pp4w97m'
+        manifestId='p78x43h3mgom6klx'
         envType='test'
       ></Experience>
   );
