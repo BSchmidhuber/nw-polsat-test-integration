@@ -5,15 +5,14 @@ const nextConfig = {
     webpack5: true,
   },
   typescript: { ignoreBuildErrors: true },
-}
+};
 
-const withTranspilation = require('next-transpile-modules')([
-  'lodash-es',
-  '@nativewaves/platform-sdk-browser',
-  '@nativewaves/exp-core-foundation',
-  '@nativewaves/exp-core-playback',
-  '@nativewaves/exp-core',
-  '@nativewaves/exp-default',
-])
+const withTranspilation = require("next-transpile-modules")([
+  "lodash-es",
+  "@nativewaves/platform-sdk-browser",
+  "@nativewaves/exp-core-playback",
+  "@nativewaves/exp-core-localization",
+  "@nativewaves/exp-core-foundation",
+]);
 
-module.exports = withTranspilation(nextConfig)
+module.exports = withTranspilation(nextConfig);

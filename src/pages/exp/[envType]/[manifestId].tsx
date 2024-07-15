@@ -1,5 +1,5 @@
-import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
+import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 const DynamicExperience = dynamic(() => import('../../../components/Experience'), {
   ssr: false,

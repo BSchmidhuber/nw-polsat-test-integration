@@ -1,6 +1,6 @@
-import '../css/globals.css';
-import Head from 'next/head';
-import { QueryClientProvider, QueryClient } from 'react-query';
+import "../css/globals.css";
+import Head from "next/head";
+import { QueryClientProvider, QueryClient } from "react-query";
 
 const queryClient = new QueryClient();
 
