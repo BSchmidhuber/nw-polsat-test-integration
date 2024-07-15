@@ -17,7 +17,7 @@
     "react-dom": "17.0.1",
     "react-query": "3.9.8",
     "react-router-dom": "5.2.0",
-    "styled-components": "5.2.1"
+    "styled-components": "6"
   },
   "devDependencies": {
     "@types/node": "^16",

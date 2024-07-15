@@ -1,7 +1,6 @@
-"use client"
-
 import { ExperienceBaseStandalone } from '@nativewaves/exp-default';
 import { Env, PlaybackContainer, ThemeProvider } from '@nativewaves/exp-core';
+import { Suspense } from 'react';
 
 type ExperienceProps = {
   manifestId: string;
@@ -15,7 +14,9 @@ const Experience: React.FC<ExperienceProps> = ({ manifestId, envType }) => {
         manifestId={manifestId}
         envType={envType}
       >
-        <ExperienceBaseStandalone routePath={'/'} />
+        <Suspense fallback={<div>Loading... </div>}>
+          <ExperienceBaseStandalone routePath={'/'} />
+        </Suspense>
       </PlaybackContainer>
     </ThemeProvider>
   );
