@@ -1,23 +1,28 @@
-"use client"
-
-import { ExperienceBaseStandalone } from '@nativewaves/exp-default';
-import { Env, PlaybackContainer, ThemeProvider } from '@nativewaves/exp-core';
+import {
+  PlaybackContainer,
+  VideoPlayerContainer,
+  BaseLayoutDesktop,
+  ExperiencePlayer,
+} from "@nativewaves/exp-core";
 
 type ExperienceProps = {
   manifestId: string;
-  envType: Env;
-}
+  envType: string;
+};
 
 const Experience: React.FC<ExperienceProps> = ({ manifestId, envType }) => {
   return (
-    <ThemeProvider>
-      <PlaybackContainer
-        manifestId={manifestId}
-        envType={envType}
-      >
-        <ExperienceBaseStandalone routePath={'/'} />
-      </PlaybackContainer>
-    </ThemeProvider>
+    <PlaybackContainer manifestId={manifestId} envType={envType as any}>
+      <>
+        <span>
+          {manifestId}, {envType}
+        </span>
+        <VideoPlayerContainer>
+          <ExperiencePlayer />
+          <BaseLayoutDesktop templateProps={{ show: true }} />
+        </VideoPlayerContainer>
+      </>
+    </PlaybackContainer>
   );
 };
 

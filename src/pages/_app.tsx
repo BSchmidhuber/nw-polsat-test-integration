@@ -1,18 +1,17 @@
-import '../css/globals.css';
-import { QueryClientProvider, QueryClient } from 'react-query';
-import Experience from '../components/Experience';
+import "../css/globals.css";
+import { QueryClientProvider, QueryClient } from "react-query";
+import dynamic from "next/dynamic";
 
 const queryClient = new QueryClient();
 
+const Experience = dynamic(() => import("../components/Experience"), {
+  ssr: false,
+});
+
 const App = () => {
-  if (!window) return <></>
-  
   return (
     <QueryClientProvider client={queryClient}>
-      <Experience
-        manifestId=''
-        envType='test'
-      ></Experience>
+      <Experience manifestId="p78x43h3mgom6klx" envType="test"></Experience>
     </QueryClientProvider>
   );
 };
