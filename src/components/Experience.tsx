@@ -1,10 +1,10 @@
 import { ExperienceBaseStandalone } from '@nativewaves/exp-default';
-import { Env, PlaybackContainer, ThemeProvider } from '@nativewaves/exp-core';
+import { PlaybackContainer, ThemeProvider } from '@nativewaves/exp-core';
 import { Suspense } from 'react';
 
 type ExperienceProps = {
   manifestId: string;
-  envType: Env;
+  envType: string;
 }
 
 const Experience: React.FC<ExperienceProps> = ({ manifestId, envType }) => {
