@@ -1,9 +1,6 @@
-import {
-  PlaybackContainer,
-  VideoPlayerContainer,
-  BaseLayoutDesktop,
-  ExperiencePlayer,
-} from "@nativewaves/exp-core";
+import { ExperienceBaseStandalone } from "@nativewaves/exp-default";
+import { PlaybackContainer } from "@nativewaves/exp-core";
+import { Suspense } from "react";
 
 type ExperienceProps = {
   manifestId: string;
@@ -12,16 +9,10 @@ type ExperienceProps = {
 
 const Experience: React.FC<ExperienceProps> = ({ manifestId, envType }) => {
   return (
-    <PlaybackContainer manifestId={manifestId} envType={envType as any}>
-      <>
-        <span>
-          {manifestId}, {envType}
-        </span>
-        <VideoPlayerContainer>
-          <ExperiencePlayer />
-          <BaseLayoutDesktop templateProps={{ show: true }} />
-        </VideoPlayerContainer>
-      </>
+    <PlaybackContainer manifestId={manifestId} envType={envType}>
+      <Suspense fallback={<div>Loading... </div>}>
+        <ExperienceBaseStandalone routePath={"/"} />
+      </Suspense>
     </PlaybackContainer>
   );
 };
