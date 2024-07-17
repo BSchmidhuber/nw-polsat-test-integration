@@ -11,7 +11,7 @@ const Experience = dynamic(() => import("../components/Experience"), {
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Experience manifestId="p78x43h3mgom6klx" envType="test"></Experience>
+      <Experience manifestId="m7q1qvhmkqyp5kep" envType="test"></Experience>
     </QueryClientProvider>
   );
 };

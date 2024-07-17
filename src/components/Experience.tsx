@@ -1,17 +1,17 @@
-import { ExperienceBaseStandalone } from "@nativewaves/exp-default";
-import { PlaybackContainer } from "@nativewaves/exp-core";
+import { Experience as NwExperience } from "@nativewaves/exp-default";
+import { Env, PlaybackContainer } from "@nativewaves/exp-core";
 import { Suspense } from "react";
 
 type ExperienceProps = {
   manifestId: string;
-  envType: string;
+  envType: Env;
 };
 
 const Experience: React.FC<ExperienceProps> = ({ manifestId, envType }) => {
   return (
     <PlaybackContainer manifestId={manifestId} envType={envType}>
       <Suspense fallback={<div>Loading... </div>}>
-        <ExperienceBaseStandalone routePath={"/"} />
+        <NwExperience routePath={"/"} />
       </Suspense>
     </PlaybackContainer>
   );

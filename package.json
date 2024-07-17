@@ -9,8 +9,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@nativewaves/exp-default": "4.10.2-polsat-player-injection.17",
-    "@nativewaves/exp-core": "4.10.2-polsat-player-injection.17",
+    "@nativewaves/exp-default": "4.10.2-polsat-player-injection.22",
+    "@nativewaves/exp-core": "4.10.2-polsat-player-injection.22",
     "next": "10.0.7",
     "next-transpile-modules": "7.3.0",
     "react": "17.0.2",
