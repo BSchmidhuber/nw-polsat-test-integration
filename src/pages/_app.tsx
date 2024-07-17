@@ -1,18 +1,19 @@
 import "../css/globals.css";
+import Head from "next/head";
 import { QueryClientProvider, QueryClient } from "react-query";
-import dynamic from "next/dynamic";
 
 const queryClient = new QueryClient();
 
-const Experience = dynamic(() => import("../components/Experience"), {
-  ssr: false,
-});
-
-const App = () => {
+const App = ({ Component, pageProps }: any) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Experience manifestId="m7q1qvhmkqyp5kep" envType="test"></Experience>
-    </QueryClientProvider>
+    <>
+      <Head>
+        <title>Next.js EXP Example</title>
+      </Head>
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
+    </>
   );
 };
 
