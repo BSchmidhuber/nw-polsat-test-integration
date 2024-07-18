@@ -15,6 +15,12 @@ const Exp = () => {
     );
   }
 
+  if (!(envType === 'prod' || envType === 'test' || envType === 'dev')) {
+    return (
+      <p>Invalid envType value</p>
+    );
+  }
+
   return (
     <>
       <h1>Experience</h1>

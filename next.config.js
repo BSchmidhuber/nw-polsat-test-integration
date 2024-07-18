@@ -4,7 +4,6 @@ const nextConfig = {
   future: {
     webpack5: true,
   },
-  typescript: { ignoreBuildErrors: true },
 };
 
 const withTranspilation = require("next-transpile-modules")([
