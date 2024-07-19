@@ -9,8 +9,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@nativewaves/exp-default": "4.10.2-polsat-player-injection.22",
-    "@nativewaves/exp-core": "4.10.2-polsat-player-injection.22",
+    "@nativewaves/exp-default": "4.10.2-polsat-player-injection.26",
+    "@nativewaves/exp-core": "4.10.2-polsat-player-injection.26",
     "next": "10.0.7",
     "next-transpile-modules": "7.3.0",
     "react": "17.0.2",
@@ -23,8 +23,5 @@
     "@types/node": "^16",
     "@types/react": "17.0.2",
     "typescript": "4.7.4"
-  },
-  "resolutions": {
-    "framer-motion": "6.0.0"
   }
 }
