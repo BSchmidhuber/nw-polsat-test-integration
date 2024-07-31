@@ -11,12 +11,14 @@
   "dependencies": {
     "@nativewaves/exp-default": "4.10.2-polsat-player-injection.30",
     "@nativewaves/exp-core": "4.10.2-polsat-player-injection.30",
+    "debug": "^4.3.6",
     "next": "10.0.7",
     "next-transpile-modules": "7.3.0",
     "react": "17.0.2",
     "react-dom": "17.0.1",
     "react-query": "3.9.8",
     "react-router-dom": "5.2.0",
+    "shaka-player": "^4.10.9",
     "styled-components": "^6"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 import { Experience as NwExperience } from "@nativewaves/exp-default";
 import { Env, PlaybackContainer } from "@nativewaves/exp-core";
-import { Suspense } from "react";
+import { Suspense, useMemo } from "react";
+import { ShakaPlayer } from "../utils/ShakaPlayer";
 
 type ExperienceProps = {
   manifestId: string;
@@ -8,10 +9,14 @@ type ExperienceProps = {
 };
 
 const Experience: React.FC<ExperienceProps> = ({ manifestId, envType }) => {
+  const polsatPlayer = useMemo(() => {
+    return new ShakaPlayer();
+  }, []);
+
   return (
     <PlaybackContainer manifestId={manifestId} envType={envType}>
       <Suspense fallback={<div>Loading... </div>}>
-        <NwExperience routePath={"/"} />
+        <NwExperience routePath={"/"} player={polsatPlayer} />
       </Suspense>
     </PlaybackContainer>
   );
