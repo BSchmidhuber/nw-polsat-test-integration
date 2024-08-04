@@ -1,4 +1,4 @@
-import { Experience as NwExperience } from "@nativewaves/exp-default";
+import { Experience, ExperienceWrapper } from "@nativewaves/exp-default";
 import { Env, PlaybackContainer } from "@nativewaves/exp-core";
 import { Suspense } from "react";
 
@@ -9,8 +9,9 @@ import {
 
 import {
   useVolleyballSidebarRoutes,
-  useVolleyballVideoControlsProps
+  useVolleyballVideoControlsProps,
 } from "@nativewaves/nw-exp-volleyball";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 type EventType = "default" | "football" | "volleyball";
 
@@ -21,37 +22,55 @@ type ExperienceProps = {
 };
 
 const useExpProps = (eventType: EventType) => {
-  const fbSR = useFootballSidebarRoutes()
-  const vbSR = useVolleyballSidebarRoutes()
-  
-  const fbVCP = useFootballVideoControlsProps()
-  const vbVCP = useVolleyballVideoControlsProps()
-  
+  const footballSidebarRoutes = useFootballSidebarRoutes();
+  const volleyballSidebarRoutes = useVolleyballSidebarRoutes();
+
+  const footballVideoControlsProps = useFootballVideoControlsProps();
+  const volleyballVideoControlsProps = useVolleyballVideoControlsProps();
+
   switch (eventType) {
     case "default":
       return {};
     case "football":
-      return { fbSR, ...fbVCP };
+      // Example: http://localhost:3000/exp/test/football/p78x43h3mgom6klx
+      return {
+        sidebarRoutes: footballSidebarRoutes,
+        ...footballVideoControlsProps,
+      };
     case "volleyball":
-      return { vbSR, ...vbVCP };
+      // Example: http://localhost:3000/exp/prod/volleyball/k7pzw2cpyldnm1vo
+      return {
+        sidebarRoutes: volleyballSidebarRoutes,
+        ...volleyballVideoControlsProps,
+      };
   }
 };
 
-const Experience: React.FC<ExperienceProps> = ({
+const queryClient = new QueryClient();
+
+const ExperienceComponent: React.FC<ExperienceProps> = ({
   manifestId,
   envType,
   eventType,
 }) => {
-  const expProps = useExpProps(eventType);
-  console.log('BS expProps', expProps)
-
   return (
     <PlaybackContainer manifestId={manifestId} envType={envType}>
       <Suspense fallback={<div>Loading... </div>}>
-        <NwExperience routePath={"/"} {...expProps} />
+        <ExperienceWrapper>
+          <QueryClientProvider client={queryClient}>
+            <NativeWavesExperience eventType={eventType} />
+          </QueryClientProvider>
+        </ExperienceWrapper>
       </Suspense>
     </PlaybackContainer>
   );
 };
 
-export default Experience;
+const NativeWavesExperience: React.FC<any> = ({ eventType }) => {
+  const expProps = useExpProps(eventType);
+  console.log("BS expProps", expProps);
+
+  return <Experience routePath={"/"} {...expProps} />;
+};
+
+export default ExperienceComponent;
