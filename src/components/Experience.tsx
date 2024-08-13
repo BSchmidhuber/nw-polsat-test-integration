@@ -1,6 +1,5 @@
-import { Experience, ExperienceWrapper } from "@nativewaves/exp-default";
+import { Experience } from "@nativewaves/exp-default";
 import { Env, PlaybackContainer } from "@nativewaves/exp-core";
-import { Suspense } from "react";
 
 import {
   useFootballSidebarRoutes,
@@ -55,22 +54,16 @@ const ExperienceComponent: React.FC<ExperienceProps> = ({
 }) => {
   return (
     <PlaybackContainer manifestId={manifestId} envType={envType}>
-      <Suspense fallback={<div>Loading... </div>}>
-        <ExperienceWrapper>
-          <QueryClientProvider client={queryClient}>
-            <NativeWavesExperience eventType={eventType} />
-          </QueryClientProvider>
-        </ExperienceWrapper>
-      </Suspense>
+      <QueryClientProvider client={queryClient}>
+        <NativeWavesExperience eventType={eventType} />
+      </QueryClientProvider>
     </PlaybackContainer>
   );
 };
 
 const NativeWavesExperience: React.FC<any> = ({ eventType }) => {
   const expProps = useExpProps(eventType);
-  console.log("BS expProps", expProps);
-
-  return <Experience routePath={"/"} {...expProps} />;
+  return <Experience {...expProps} />;
 };
 
 export default ExperienceComponent;
