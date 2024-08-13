@@ -1,5 +1,5 @@
 import { Experience } from "@nativewaves/exp-default";
-import { Env, PlaybackContainer } from "@nativewaves/exp-core";
+import { CreatePlayerFn, Env, PlaybackContainer } from "@nativewaves/exp-core";
 
 import {
   useFootballSidebarRoutes,
@@ -11,6 +11,7 @@ import {
   useVolleyballVideoControlsProps,
 } from "@nativewaves/nw-exp-volleyball";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ShakaPlayer } from "./player";
 
 type EventType = "default" | "football" | "volleyball";
 
@@ -63,7 +64,29 @@ const ExperienceComponent: React.FC<ExperienceProps> = ({
 
 const NativeWavesExperience: React.FC<any> = ({ eventType }) => {
   const expProps = useExpProps(eventType);
-  return <Experience {...expProps} />;
+  return <Experience {...expProps} createPlayerFn={createPlayer} />;
+};
+
+const createPlayer: CreatePlayerFn = ({
+  mediaType,
+  sourceType,
+  videoContainer,
+  onPlayerStateUpdate,
+}) => {
+  console.log("New player instance is requested with the following details:", {
+    mediaType,
+    sourceType,
+    videoContainer,
+    onPlayerStateUpdate,
+  });
+
+  if (mediaType === "video") {
+    // return video-specific player
+    return new ShakaPlayer(videoContainer, onPlayerStateUpdate);
+  } else {
+    // return audio-specific player
+    return new ShakaPlayer(videoContainer, onPlayerStateUpdate);
+  }
 };
 
 export default ExperienceComponent;

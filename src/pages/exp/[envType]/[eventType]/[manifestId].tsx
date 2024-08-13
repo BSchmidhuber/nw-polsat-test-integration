@@ -3,15 +3,12 @@ import { useRouter } from "next/router";
 
 const DynamicExperience = dynamic(
   () => import("../../../../components/Experience"),
-  {
-    ssr: false,
-  }
+  { ssr: false }
 );
 
 const Exp = () => {
   const router = useRouter();
   const { envType, eventType, manifestId } = router.query;
-  console.log("BS router query", { envType, eventType, manifestId });
 
   if (
     typeof envType !== "string" ||

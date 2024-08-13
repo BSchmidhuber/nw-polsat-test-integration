@@ -9,16 +9,17 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@nativewaves/exp-default": "4.11.0",
-    "@nativewaves/exp-core": "4.11.0",
-    "@nativewaves/nw-exp-football": "4.11.0",
-    "@nativewaves/nw-exp-volleyball": "4.11.0",
+    "@nativewaves/exp-default": "4.11.0-polsat-player-injection.34",
+    "@nativewaves/exp-core": "4.11.0-polsat-player-injection.34",
+    "@nativewaves/nw-exp-football": "4.11.0-polsat-player-injection.34",
+    "@nativewaves/nw-exp-volleyball": "4.11.0-polsat-player-injection.34",
     "next": "10.0.7",
     "next-transpile-modules": "7.3.0",
     "react": "17.0.2",
     "react-dom": "17.0.1",
     "react-query": "3.9.8",
     "react-router-dom": "5.2.0",
+    "shaka-player": "^4.0.0",
     "styled-components": "^6"
   },
   "devDependencies": {
