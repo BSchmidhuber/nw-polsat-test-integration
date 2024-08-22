@@ -9,6 +9,7 @@ export class ShakaPlayer extends NwBasePlayer {
   constructor(
     videoContainer: HTMLElement | string,
     onStateUpdate: (state: PlayerState) => void,
+    isLiveMode: boolean,
     options?: CommonPlayerConfig,
   ) {
     super(videoContainer, onStateUpdate, options)
@@ -22,6 +23,9 @@ export class ShakaPlayer extends NwBasePlayer {
       // Everything looks good!
       this.shakaPlayer = new shaka.Player()
       this.shakaPlayer.attach(this.videoElement)
+      if (isLiveMode) {
+        this.shakaPlayer.configure({ streaming: { lowLatencyMode: true }})
+      }
     } else {
       // This browser does not have the minimum set of APIs we need.
       throw new Error('Browser not supported!')

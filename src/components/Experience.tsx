@@ -32,7 +32,7 @@ const useExpProps = (eventType: EventType) => {
     case "default":
       return {};
     case "football":
-      // Example: http://localhost:3000/exp/test/football/p78x43h3mgom6klx
+      // Example: http://localhost:3000/exp/prod/football/z6y2woadq1wygj7e
       return {
         sidebarRoutes: footballSidebarRoutes,
         ...footballVideoControlsProps,
@@ -70,23 +70,25 @@ const NativeWavesExperience: React.FC<any> = ({ eventType }) => {
 const createPlayer: CreatePlayerFn = ({
   mediaType,
   sourceType,
+  isLiveMode,
   videoContainer,
   onPlayerStateUpdate,
 }) => {
   console.log("New player instance is requested with the following details:", {
     mediaType,
     sourceType,
+    isLiveMode,
     videoContainer,
     onPlayerStateUpdate,
   });
 
-  if (mediaType === "video") {
+  if (mediaType === "video" && sourceType === "dash") {
     // return video-specific player
-    return new ShakaPlayer(videoContainer, onPlayerStateUpdate);
-  } else {
-    // return audio-specific player
-    return new ShakaPlayer(videoContainer, onPlayerStateUpdate);
+    return new ShakaPlayer(videoContainer, onPlayerStateUpdate, isLiveMode);
   }
+
+  // fallback to default NW player
+  return null;
 };
 
 export default ExperienceComponent;
