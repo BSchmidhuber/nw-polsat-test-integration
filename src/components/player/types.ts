@@ -39,12 +39,7 @@ export type SeekOptions = {
 
 export type ISeekable = Pick<
   HTMLVideoElement,
-  | "currentTime"
-  | "duration"
-  | "playbackRate"
-  | "seekable"
-  | "buffered"
-  | "paused"
+  "currentTime" | "playbackRate" | "seekable" | "buffered" | "paused"
 >;
 
 export interface SeekStrategy<T = ISeekable> {
@@ -55,7 +50,7 @@ export interface SeekStrategy<T = ISeekable> {
   algorythm: (player: T, delay: number) => void;
 }
 
-export type CommonPlayerConfig = {
+export type PlayerConfig = {
   mode?: "native" | "default";
   videoAttributes?: Partial<VideoHTMLAttributes<HTMLVideoElement>>;
   seekStrategy?: SeekStrategy;
