@@ -37,7 +37,7 @@ export class ExternalAsyncPlayer {
     console.log("external async player load " + { url, accessMethod });
   };
 
-  public play = () => {
+  public play = async () => {
     console.log("external async player plays");
   };
 

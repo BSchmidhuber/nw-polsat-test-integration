@@ -10,14 +10,17 @@ import { ExternalAsyncPlayer } from "./ExternalAsyncPlayer";
 export class PolsatPlayerWithBase extends NwBasePlayer {
   private playerInstance: ExternalAsyncPlayer;
 
+  /**
+   * HTML video element and player instance should be created here
+   */
   constructor(
     videoContainer: HTMLElement | string,
     onStateUpdate: (state: PlayerState) => void,
     isLiveMode: boolean,
     config?: PlayerConfig
   ) {
-    super(videoContainer, onStateUpdate, config)
-    this.videoElement = this.createVideoElement()
+    super(videoContainer, onStateUpdate, config);
+    this.videoElement = this.createVideoElement();
 
     this.playerInstance = new ExternalAsyncPlayer({
       videoElement: this.videoElement,
@@ -26,39 +29,45 @@ export class PolsatPlayerWithBase extends NwBasePlayer {
     });
   }
 
+  /**
+   * only needed if you want to override the default behaviour
+   * (= reading current time value of the video element)
+   */
   get currentTime() {
-    // only needed if you want to override the default behaviour
-    // (reading of the video element)
     return this.playerInstance.currentTime;
   }
 
+  /**
+   * only needed if you want to override the default behaviour
+   * (= calling videoElement.play())
+   */
   public play() {
-    // only needed if you want to override the default behaviour
-    // (reading of the video element)
-    this.playerInstance.play();
-    return super.play()
+    return this.playerInstance.play();
   }
 
+  /**
+   * only needed if you want to override the default behaviour
+   * (= calling videoElement.pause())
+   */
   public pause() {
-    // only needed if you want to override the default behaviour
-    // (reading of the video element)
     this.playerInstance.pause();
-
-    // call functionality of base class
-    super.pause()
   }
 
+  /**
+   * tell your player instance to load a specific stream source
+   */
   public load = (src: string) => {
     this.playerInstance.ready.then(() => {
       this.playerInstance.load({ url: src, accessMethod: "dash" });
     });
-
-    // call functionality of base class
-    super.load(src)
   };
 
+  /**
+   * will be called when the player isn't needed any more, you can destroy
+   * you player instance, video element event handlers, reset status etc...
+   */
   public destroy = () => {
     this.playerInstance.destroy();
-    super.destroy()
+    super.destroy();
   };
 }
