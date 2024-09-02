@@ -1,5 +1,10 @@
 import { Experience } from "@nativewaves/exp-default";
-import { CreatePlayerFn, Env, PlaybackContainer } from "@nativewaves/exp-core";
+import {
+  CreatePlayerFn,
+  Env,
+  INwPlayer,
+  PlaybackContainer,
+} from "@nativewaves/exp-core";
 
 import {
   useFootballSidebarRoutes,
@@ -11,7 +16,9 @@ import {
   useVolleyballVideoControlsProps,
 } from "@nativewaves/nw-exp-volleyball";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ShakaPlayer } from "./player";
+import { useCallback } from "react";
+import { PolsatPlayerWithBase } from "./player/PolsatPlayerWithBase";
+import { ExternalAsyncPlayer } from "./player/ExternalAsyncPlayer";
 
 type EventType = "default" | "football" | "volleyball";
 
@@ -64,31 +71,41 @@ const ExperienceComponent: React.FC<ExperienceProps> = ({
 
 const NativeWavesExperience: React.FC<any> = ({ eventType }) => {
   const expProps = useExpProps(eventType);
+
+  const createPlayer: CreatePlayerFn = useCallback(
+    async (createPlayerConfig) => {
+      const {
+        mediaType,
+        sourceType,
+        isLiveMode,
+        videoContainer,
+        onPlayerStateUpdate,
+      } = createPlayerConfig;
+
+      console.log(
+        "New player instance is requested with the following details:",
+        createPlayerConfig
+      );
+
+      if (mediaType === "video" && sourceType === "dash") {
+        const playerInstance = new ExternalAsyncPlayer(createPlayerConfig);
+        await playerInstance.ready;
+
+        // return video-specific dash player
+        return new PolsatPlayerWithBase(
+          videoContainer,
+          onPlayerStateUpdate,
+          isLiveMode
+        );
+      }
+
+      // fallback to default NW player
+      return null;
+    },
+    []
+  );
+
   return <Experience {...expProps} createPlayerFn={createPlayer} />;
-};
-
-const createPlayer: CreatePlayerFn = ({
-  mediaType,
-  sourceType,
-  isLiveMode,
-  videoContainer,
-  onPlayerStateUpdate,
-}) => {
-  console.log("New player instance is requested with the following details:", {
-    mediaType,
-    sourceType,
-    isLiveMode,
-    videoContainer,
-    onPlayerStateUpdate,
-  });
-
-  if (mediaType === "video" && sourceType === "dash") {
-    // return video-specific player
-    return new ShakaPlayer(videoContainer, onPlayerStateUpdate, isLiveMode);
-  }
-
-  // fallback to default NW player
-  return null;
 };
 
 export default ExperienceComponent;

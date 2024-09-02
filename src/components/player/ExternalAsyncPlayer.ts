@@ -3,11 +3,7 @@
  * It should not be implemented anywhere!
  */
 export class ExternalAsyncPlayer {
-  constructor(config: {
-    videoElement: HTMLVideoElement;
-    lowLatencyMode: boolean;
-    customConfig: any;
-  }) {
+  constructor(config?: any) {
     console.log("external async player created with config" + { config });
   }
 
@@ -24,7 +20,7 @@ export class ExternalAsyncPlayer {
   }
 
   public get ready() {
-    return Promise.resolve(true);
+    return new Promise(res => setTimeout(res, 100));
   }
 
   public load = ({

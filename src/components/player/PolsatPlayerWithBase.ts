@@ -57,9 +57,7 @@ export class PolsatPlayerWithBase extends NwBasePlayer {
    * tell your player instance to load a specific stream source
    */
   public load = (src: string) => {
-    this.playerInstance.ready.then(() => {
-      this.playerInstance.load({ url: src, accessMethod: "dash" });
-    });
+    this.playerInstance.load({ url: src, accessMethod: "dash" });
   };
 
   /**

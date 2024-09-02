@@ -9,10 +9,10 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@nativewaves/exp-default": "4.11.0-polsat-player-injection.36",
-    "@nativewaves/exp-core": "4.11.0-polsat-player-injection.36",
-    "@nativewaves/nw-exp-football": "4.11.0-polsat-player-injection.36",
-    "@nativewaves/nw-exp-volleyball": "4.11.0-polsat-player-injection.36",
+    "@nativewaves/exp-default": "4.11.2-polsat-player-injection.37",
+    "@nativewaves/exp-core": "4.11.2-polsat-player-injection.37",
+    "@nativewaves/nw-exp-football": "4.11.2-polsat-player-injection.37",
+    "@nativewaves/nw-exp-volleyball": "4.11.2-polsat-player-injection.37",
     "next": "10.0.7",
     "next-transpile-modules": "7.3.0",
     "react": "17.0.2",
