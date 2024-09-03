@@ -33,6 +33,10 @@ export class CpPlayer extends NwBasePlayer {
     return this.playerInstance.getVideoTag();
   }
 
+  public get currentTime() {
+    return this.playerInstance.getCurrentTime();
+  }
+
   public ready() {
     return this.playerInstance.ready;
   }
@@ -42,7 +46,31 @@ export class CpPlayer extends NwBasePlayer {
     this.playerInstance.load({ url: src, accessMethod: this.sourceType });
   }
 
+  public async play() {
+    console.log('play');
+    await this.playerInstance.play();
+  }
+
+  public async pause() {
+    console.log('pause');
+    await this.playerInstance.pause();
+  }
+
+  public async seek(currentTime: number) {
+    console.log('seek', currentTime);
+    this.playerInstance.skip(currentTime);
+    return { currentTime };
+  }
+
+  public async jump(value: number) {
+    console.log('jump', value);
+    const currentTime = this.currentTime + value;
+    this.playerInstance.skip(currentTime);
+    return { currentTime };
+  }
+
   public destroy() {
+    console.log('destroy');
     this.playerInstance.destroy();
   }
 }
