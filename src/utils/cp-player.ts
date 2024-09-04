@@ -37,6 +37,12 @@ export class CpPlayer extends NwBasePlayer {
     return this.playerInstance.getCurrentTime();
   }
 
+  public set currentTime(currentTime) {
+    this.playerInstance.skip(currentTime)
+    // alternative:
+    // this.videoElement.currentTime = currentTime
+  }
+
   public ready() {
     return this.playerInstance.ready;
   }
@@ -55,19 +61,6 @@ export class CpPlayer extends NwBasePlayer {
   public async pause() {
     console.log('pause');
     await this.playerInstance.pause();
-  }
-
-  public async seek(currentTime: number) {
-    console.log('seek', currentTime);
-    this.playerInstance.skip(currentTime);
-    return { currentTime };
-  }
-
-  public async jump(value: number) {
-    console.log('jump', value);
-    const currentTime = this.currentTime + value;
-    this.playerInstance.skip(currentTime);
-    return { currentTime };
   }
 
   public destroy() {
