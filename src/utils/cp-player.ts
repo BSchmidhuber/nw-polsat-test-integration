@@ -43,6 +43,7 @@ export class CpPlayer extends NwBasePlayer {
 
   public load(src: string) {
     console.log('load', src);
+    this.registerVideoEvents(this.videoElement)
     this.playerInstance.load({ url: src, accessMethod: this.sourceType });
   }
 
@@ -71,6 +72,7 @@ export class CpPlayer extends NwBasePlayer {
 
   public destroy() {
     console.log('destroy');
+    this.removeVideoEvents(this.videoElement)
     this.playerInstance.destroy();
   }
 }
