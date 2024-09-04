@@ -2,10 +2,8 @@ import { Experience } from "@nativewaves/exp-default";
 import { Env, PlaybackContainer } from "@nativewaves/exp-core";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createPlayer } from "../utils/create-player";
-import { ExpAppConfig } from "@nativewaves/exp-app-config-loader";
-import { useEffect, useState } from "react";
+import { useExpAppConfig } from "@nativewaves/exp-app-config-loader";
 import { useExpProps } from "@nativewaves/exp-app-experiences-loader";
-import { PartialThemeType } from "@nativewaves/exp-app-config-loader/dist/types";
 import { ThemeProvider } from "styled-components";
 
 type ExperienceProps = {
@@ -30,28 +28,20 @@ const ExperienceComponent: React.FC<ExperienceProps> = ({
   manifestId,
   envType,
 }) => {
-  const [configReady, setConfigReady] = useState(false);
-  const [expHandlerId, setExpHandlerId] = useState<string>();
-  const [theme, setTheme] = useState<PartialThemeType>({});
+  const configId = getConfigIdByEnvType(envType);
+  const expAppConfig = useExpAppConfig(envType, manifestId, configId);
 
-  useEffect(() => {
-    const configId = getConfigIdByEnvType(envType);
-    const expAppConfig = new ExpAppConfig(envType, manifestId, configId);
-    Promise.all([expAppConfig.getExpHandlerId(), expAppConfig.getTheme()]).then(
-      ([expHandlerId, theme]) => {
-        setExpHandlerId(expHandlerId);
-        setTheme(theme);
-        setConfigReady(true);
-      }
-    );
-  }, []);
-
-  if (!configReady) return <>EXP App Config loading...</>;
+  if (!expAppConfig.configReady) {
+    return <>EXP App Config loading...</>;
+  }
 
   return (
     <PlaybackContainer manifestId={manifestId} envType={envType}>
       <QueryClientProvider client={queryClient}>
-        <NativeWavesExperience expHandlerId={expHandlerId} theme={theme} />
+        <NativeWavesExperience
+          expHandlerId={expAppConfig.expHandlerId}
+          theme={expAppConfig.theme}
+        />
       </QueryClientProvider>
     </PlaybackContainer>
   );
