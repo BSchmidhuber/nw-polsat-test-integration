@@ -61,7 +61,12 @@ const NativeWavesExperience: React.FC<any> = ({ expHandlerId, theme }) => {
   const expProps = useExpProps({ expHandlerId });
   return (
     <ThemeProvider theme={theme}>
-      <Experience createPlayerFn={createPlayer} layout="polsat" {...expProps} />
+      <Experience
+        createPlayerFn={createPlayer}
+        sourceTypes={["dash"]}
+        layout="polsat"
+        {...expProps}
+      />
     </ThemeProvider>
   );
 };
