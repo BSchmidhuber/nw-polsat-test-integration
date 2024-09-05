@@ -1,19 +1,18 @@
-import { Experience } from "@nativewaves/exp-default";
-import { Env, PlaybackContainer } from "@nativewaves/exp-core";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createPlayer } from "../utils/create-player";
-import { useExpAppConfig } from "@nativewaves/exp-app-config-loader";
-import { useExpProps } from "@nativewaves/exp-app-experiences-loader";
-import { ThemeProvider } from "styled-components";
+import { Experience } from "@nativewaves/exp-app-config-loader";
+import { experienceHooks } from "@nativewaves/exp-app-experiences-loader";
+
+type EnvType = "prod" | "test" | "dev";
 
 type ExperienceProps = {
   manifestId: string;
-  envType: Env;
+  envType: EnvType;
 };
 
 const queryClient = new QueryClient();
 
-const getConfigIdByEnvType = (envType: Env) => {
+const getConfigIdByEnvType = (envType: EnvType) => {
   switch (envType) {
     case "dev":
       return "5z2ed7df33m7m0nz";
@@ -29,35 +28,18 @@ const ExperienceComponent: React.FC<ExperienceProps> = ({
   envType,
 }) => {
   const configId = getConfigIdByEnvType(envType);
-  const expAppConfig = useExpAppConfig(envType, manifestId, configId);
-
-  if (!expAppConfig.configReady) {
-    return <>EXP App Config loading...</>;
-  }
 
   return (
-    <PlaybackContainer manifestId={manifestId} envType={envType}>
-      <QueryClientProvider client={queryClient}>
-        <NativeWavesExperience
-          expHandlerId={expAppConfig.expHandlerId}
-          theme={expAppConfig.theme}
-        />
-      </QueryClientProvider>
-    </PlaybackContainer>
-  );
-};
-
-const NativeWavesExperience: React.FC<any> = ({ expHandlerId, theme }) => {
-  const expProps = useExpProps({ expHandlerId });
-  return (
-    <ThemeProvider theme={theme}>
+    <QueryClientProvider client={queryClient}>
       <Experience
+        manifestId={manifestId}
+        envType={envType}
+        appConfigId={configId}
+        expHooks={experienceHooks}
         createPlayerFn={createPlayer}
         sourceTypes={["dash"]}
-        layout="polsat"
-        {...expProps}
       />
-    </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 
