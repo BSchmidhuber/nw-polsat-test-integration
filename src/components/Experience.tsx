@@ -37,7 +37,7 @@ const ExperienceComponent: React.FC<ExperienceProps> = ({
         appConfigId={configId}
         expHooks={experienceHooks}
         createPlayerFn={createPlayer}
-        sourceTypes={["dash"]}
+        sourceTypes={["dash", "hls", "mp4"]}
       />
     </QueryClientProvider>
   );
