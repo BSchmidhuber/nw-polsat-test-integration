@@ -9,6 +9,7 @@ const App = ({ Component, pageProps }: any) => {
     <>
       <Head>
         <title>Next.js EXP Example</title>
+        <script src="https://redirector.redefine.pl/versions/cp-player-2-native-waves.js"></script>
       </Head>
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />

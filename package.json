@@ -9,10 +9,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@nativewaves/exp-default": "4.11.0",
-    "@nativewaves/exp-core": "4.11.0",
-    "@nativewaves/nw-exp-football": "4.11.0",
-    "@nativewaves/nw-exp-volleyball": "4.11.0",
+    "@nativewaves/exp-core": "4.12.0-polsat.46",
+    "@nativewaves/exp-app-config-loader": "4.12.0-polsat.46",
+    "@nativewaves/exp-app-experiences-loader": "4.12.0-polsat.46",
     "next": "10.0.7",
     "next-transpile-modules": "7.3.0",
     "react": "17.0.2",
