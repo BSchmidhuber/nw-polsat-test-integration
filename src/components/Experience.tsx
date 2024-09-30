@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createPlayer } from "../utils/create-player";
-import { Experience } from "@nativewaves/exp-app-config-loader";
-import { experienceHooks } from "@nativewaves/exp-app-experiences-loader";
+import { ExperienceLoader } from "@nativewaves/exp-app-utilities";
+import { defaultExperienceHandlers } from "@nativewaves/exp-app-default-config";
 
 type EnvType = "prod" | "test" | "dev";
 
@@ -31,11 +31,11 @@ const ExperienceComponent: React.FC<ExperienceProps> = ({
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Experience
+      <ExperienceLoader
         manifestId={manifestId}
         envType={envType}
         appConfigId={configId}
-        expHooks={experienceHooks}
+        expHandlers={defaultExperienceHandlers}
         createPlayerFn={createPlayer}
         sourceTypes={["dash", "hls", "mp4"]}
       />

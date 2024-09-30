@@ -5,14 +5,14 @@ export class CpPlayer extends NwBasePlayer {
   private sourceType: SourceType;
 
   constructor(
-    videoContainer: HTMLDivElement,
+    videoContainer: HTMLElement,
     onStateUpdate: (state: any) => void,
     sourceType: SourceType,
   ) {
     super(videoContainer, onStateUpdate);
 
     this.playerInstance = new CyfrowyPlayer.Player({
-      container: videoContainer,
+      container: videoContainer as HTMLDivElement,
       load: {
         preload: false,
       },

@@ -12,8 +12,8 @@ const withTranspilation = require("next-transpile-modules")([
   "@nativewaves/exp-core-playback",
   "@nativewaves/exp-core-localization",
   "@nativewaves/exp-core-foundation",
-  "@nativewaves/exp-app-config-loader",
-  "@nativewaves/exp-app-experiences-loader",
+  "@nativewaves/exp-app-utilities",
+  "@nativewaves/exp-app-default-config",
   "@nativewaves/nw-exp-drag-racing",
 ]);
 

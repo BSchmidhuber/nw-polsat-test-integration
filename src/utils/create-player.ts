@@ -1,11 +1,7 @@
-import { CreatePlayerConfig, INwPlayer } from '@nativewaves/exp-core';
+import { CreatePlayerFn } from '@nativewaves/exp-core';
 import { CpPlayer } from './cp-player';
 
-// Temporary solution: videoContainer type override
-type NewCreatePlayerConfig = CreatePlayerConfig & { videoContainer: any };
-type NewCreatePlayerFn = (config: NewCreatePlayerConfig) => Promise<INwPlayer | null>;
-
-export const createPlayer: NewCreatePlayerFn = async (createPlayerConfig) => {
+export const createPlayer: CreatePlayerFn = async (createPlayerConfig) => {
   const { mediaType, sourceType, videoContainer, onPlayerStateUpdate } = createPlayerConfig;
   console.log('New player instance is requested with the following details:', createPlayerConfig);
 
